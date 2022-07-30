@@ -17,7 +17,6 @@ https://cloud-parking-br.herokuapp.com/swagger-ui/index.html#
 ***With docker-compose*:**
 
 ```
-run with docker-compose
 docker-compose up 
 ```
 
