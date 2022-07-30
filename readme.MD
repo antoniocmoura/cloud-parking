@@ -1,6 +1,6 @@
 # Cloud-Parking
 
-- API developed with Java and Spring Boot using clean architecture and the main current best practices in the market.
+- Performing Cloud Deployment of a set of APIs developed in Spring Boot using clean architecture and the main current best practices in the market.
 
 ## How to build and run
 ***With docker*:**
@@ -12,11 +12,13 @@ docker-compose up
 or run the commands individually:
 
 ```
-docker run --name parking-db -p 5432:5432 -e POSTGRES_DB=parking -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -d postgres:10-alpine
+docker network create --driver bridge parking-net
 
-docker build -t cloud-parking-image . && docker run --name cloud-parking-container -p 8080:8080 -d cloud-parking-image
+docker run --name parking-db --network parking-net -p 5432:5432 -e POSTGRES_DB=parking -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -d postgres:10-alpine
 
-docker build -t nginx-image .\infrastructure\nginx\ && docker run --name nginx -p:80:80 -d nginx-image
+docker build -t cloud-parking-image .\infrastructure\docker\app && docker run --name cloud-parking-container --network parking-net -p 8080:8080 -d cloud-parking-image
+
+docker build -t nginx-image .\infrastructure\docker\nginx\ && docker run --name nginx --network parking-net -p:80:80 -d nginx-image
 ```
 
 ***Without docker*:**
@@ -28,9 +30,15 @@ Build and generate the artifact file with the maven command `mvn clean package` 
 
 The API documentation will be accessible at [http://localhost:8080/swagger-ui/index.html](http:localhost:8080)
 
+***Heroku*:**
+
+https://cloud-parking-br.herokuapp.com/swagger-ui/index.html#
+
 ## How to authenticate
 
 Login with user admin and password admin on the authentication endpoint and send the received JWT token in the request header.
+
+Username and password can be changed in application.yml file.
 
 ## Samples
 
