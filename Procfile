@@ -1,1 +1,1 @@
-web: java -jar ./infrastructure/target/infrastructure-0.0.1-SNAPSHOT.jar
+web: java -Dserver.port=$PORT $JAVA_OPTS -jar ./infrastructure/target/infrastructure-0.0.1-SNAPSHOT.jar
