@@ -4,7 +4,7 @@ Performing Cloud Deployment of a set of APIs developed in Spring Boot using clea
 
 ## Authentication
 
-Login with user admin and password admin on the authentication endpoint and send the received JWT token in the request header.
+Login with user *admin* and password *admin* on the authentication endpoint and send the received JWT token in the request header.
 
 Username and password can be changed in application.yml file.
 
