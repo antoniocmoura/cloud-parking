@@ -35,8 +35,8 @@ public interface AuthEndpoint {
                                     mediaType = "application/json",
                                     schema = @Schema(implementation = AuthResponse.class))
                     }),
-            @ApiResponse(responseCode = "401", description = "Invalid credentials"),
-            @ApiResponse(responseCode = "500", description = "An internal server error was thrown"),
+            @ApiResponse(responseCode = "401", description = "Invalid credentials", content = @Content),
+            @ApiResponse(responseCode = "500", description = "An internal server error was thrown", content = @Content),
     })
 
     ResponseEntity<?> login(@RequestBody  @Valid AuthRequest request);

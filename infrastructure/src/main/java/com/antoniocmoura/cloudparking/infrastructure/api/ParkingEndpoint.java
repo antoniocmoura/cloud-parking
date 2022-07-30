@@ -13,6 +13,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -36,8 +37,9 @@ public interface ParkingEndpoint {
                                     mediaType = "application/json",
                                     schema = @Schema(implementation = ParkingResponse.class))
                     }),
-            @ApiResponse(responseCode = "422", description = "A validation error was thrown"),
-            @ApiResponse(responseCode = "500", description = "An internal server error was thrown"),
+            @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
+            @ApiResponse(responseCode = "422", description = "A validation error was thrown", content = @Content),
+            @ApiResponse(responseCode = "500", description = "An internal server error was thrown", content = @Content),
     })
     ResponseEntity<?> create(@RequestBody @Valid CreateParkingRequest input);
 
@@ -49,8 +51,9 @@ public interface ParkingEndpoint {
     @Operation(summary = "Delete a parking by it's identifier")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "Parking deleted successfully"),
-            @ApiResponse(responseCode = "404", description = "Parking was not found"),
-            @ApiResponse(responseCode = "500", description = "An internal server error was thrown"),
+            @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Parking was not found", content = @Content),
+            @ApiResponse(responseCode = "500", description = "An internal server error was thrown", content = @Content),
     })
     void deleteById(@PathVariable(name = "id") String id);
 
@@ -66,8 +69,9 @@ public interface ParkingEndpoint {
                                     mediaType = "application/json",
                                     schema = @Schema(implementation = ParkingResponse.class))
                     }),
-            @ApiResponse(responseCode = "404", description = "Parking was not found"),
-            @ApiResponse(responseCode = "500", description = "An internal server error was thrown"),
+            @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Parking was not found", content = @Content),
+            @ApiResponse(responseCode = "500", description = "An internal server error was thrown", content = @Content),
     })
     ResponseEntity<?> updateById(@RequestBody UpdateParkingRequest input);
 
@@ -78,8 +82,9 @@ public interface ParkingEndpoint {
     @Operation(summary = "Get a parking by it´s identifier")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Parking retrieved successfully"),
-            @ApiResponse(responseCode = "404", description = "Parking was not found"),
-            @ApiResponse(responseCode = "500", description = "An internal server error was thrown")
+            @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Parking was not found", content = @Content),
+            @ApiResponse(responseCode = "500", description = "An internal server error was thrown", content = @Content)
     })
     ParkingResponse getById(@PathVariable(name = "id") String id);
 
@@ -87,8 +92,9 @@ public interface ParkingEndpoint {
     @Operation(summary = "List all parking paginated")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Listed successfully"),
-            @ApiResponse(responseCode = "422", description = "A invalid parameter was received"),
-            @ApiResponse(responseCode = "500", description = "An internal server error was thrown"),
+            @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
+            @ApiResponse(responseCode = "422", description = "A invalid parameter was received", content = @Content),
+            @ApiResponse(responseCode = "500", description = "An internal server error was thrown", content = @Content),
     })
     Pagination<ParkingResponse> findAll(
             @RequestParam(name = "search", required = false, defaultValue = "") final String search,
@@ -107,8 +113,9 @@ public interface ParkingEndpoint {
                                     mediaType = "application/json",
                                     schema = @Schema(implementation = ParkingResponse.class))
                     }),
-            @ApiResponse(responseCode = "422", description = "A validation error was thrown"),
-            @ApiResponse(responseCode = "500", description = "An internal server error was thrown"),
+            @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
+            @ApiResponse(responseCode = "422", description = "A validation error was thrown", content = @Content),
+            @ApiResponse(responseCode = "500", description = "An internal server error was thrown", content = @Content),
     })
     ResponseEntity<?> checkOut(@PathVariable String id);
 

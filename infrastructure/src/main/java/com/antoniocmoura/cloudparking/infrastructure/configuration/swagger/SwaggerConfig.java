@@ -6,8 +6,15 @@ import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.security.SecurityScheme;
+import org.apache.commons.lang3.StringUtils;
+import org.springdoc.core.customizers.OpenApiCustomiser;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.util.Comparator;
+import java.util.stream.Collectors;
+
+import static org.apache.coyote.http11.Constants.a;
 
 @Configuration
 @OpenAPIDefinition(
@@ -20,7 +27,16 @@ public class SwaggerConfig {
     private static final String SCHEME = "bearer";
 
     @Bean
+    public OpenApiCustomiser sortTagsAlphabetically() {
+        return openApi -> openApi.setTags(openApi.getTags()
+                .stream()
+                .sorted(Comparator.comparing(tag -> StringUtils.stripAccents(tag.getName())))
+                .collect(Collectors.toList()));
+    }
+
+    @Bean
     OpenAPI customOpenApi(ApiInfoProvider infoProvider) {
+
         return new OpenAPI()
                 .info(infoProvider.provide())
                 .components(new Components()
