@@ -2,9 +2,6 @@
 server.port: 8080
 
 app:
-  login:
-    username: admin
-    password: admin
   jwt:
     secret: abcdefghijklmnOPQRSTUVWXYZ
 
@@ -15,9 +12,9 @@ swagger:
 
 spring:
   datasource:
-    url: jdbc:postgresql://127.0.0.1:5432/parking?useTimezone=true&serverTimezone=UTC&useLegacyDate
-    username: postgres
-    password: postgres
+    url: jdbc:postgresql://parking-db:5432/parking?useTimezone=true&serverTimezone=UTC&useLegacyDate
+    username: admin
+    password: admin@123
   jpa:
     show-sql: true
     hibernate:

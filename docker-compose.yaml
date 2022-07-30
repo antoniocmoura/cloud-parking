@@ -1,0 +1,49 @@
+version: '3'
+
+services:
+
+  app:
+    build:
+      context: ./infrastructure/docker/app
+    image: antoniocmoura/cloud-parking
+    container_name: cloud-parking
+    entrypoint: dockerize -wait tcp://parking-db:5432 -timeout 30s java -jar infrastructure-0.0.1-SNAPSHOT.jar
+    tty: true
+    networks:
+      - parking-net
+    ports:
+      - "8080-8080"
+    depends_on:
+      - db
+
+  db:
+    image: postgres:10-alpine
+    container_name: parking-db
+    restart: always
+    tty: true
+    volumes:
+      - ./infrastructure/db-data/:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin@123
+      - POSTGRES_DB=parking
+    networks:
+      - parking-net
+    ports:
+      - "5432:5432"
+
+  nginx:
+    build:
+      context: ./infrastructure/docker/nginx
+    image: antoniocmoura/nginx
+    container_name: nginx
+    networks:
+      - parking-net
+    ports:
+      - "8080:80"
+    depends_on:
+      - app
+
+networks:
+  parking-net:
+    driver: bridge
