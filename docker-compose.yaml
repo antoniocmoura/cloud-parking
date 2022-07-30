@@ -4,7 +4,7 @@ services:
 
   app:
     build:
-      context: ./infrastructure/docker/app
+      context: .
     image: antoniocmoura/cloud-parking
     container_name: cloud-parking
     entrypoint: dockerize -wait tcp://parking-db:5432 -timeout 30s java -jar infrastructure-0.0.1-SNAPSHOT.jar
@@ -34,7 +34,7 @@ services:
 
   nginx:
     build:
-      context: ./infrastructure/docker/nginx
+      context: infrastructure/nginx
     image: antoniocmoura/nginx
     container_name: nginx
     networks:
