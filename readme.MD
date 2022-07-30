@@ -2,7 +2,7 @@
 
 - Performing Cloud Deployment of a set of APIs developed in Spring Boot using clean architecture and the main current best practices in the market.
 
-## Heroku Application
+## Heroku app
 
 https://cloud-parking-br.herokuapp.com/swagger-ui/index.html#
 
