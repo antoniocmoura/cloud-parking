@@ -3,22 +3,26 @@
 - Performing Cloud Deployment of a set of APIs developed in Spring Boot using clean architecture and the main current best practices in the market.
 
 ## How to build and run
-***With docker*:**
+***Heroku*:**
+
+https://cloud-parking-br.herokuapp.com/swagger-ui/index.html#
+
+***With docker-compose*:**
 
 ```
 docker-compose up 
 ```
 
-or run the commands individually:
+***With docker*:**
 
 ```
 docker network create --driver bridge parking-net
 
 docker run --name parking-db --network parking-net -p 5432:5432 -e POSTGRES_DB=parking -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -d postgres:10-alpine
 
-docker build -t cloud-parking-image .\infrastructure\docker\app && docker run --name cloud-parking-container --network parking-net -p 8080:8080 -d cloud-parking-image
+docker build -t cloud-parking-image ./infrastructure/docker/app/ && docker run --name cloud-parking-container --network parking-net -p 8080:8080 -d cloud-parking-image
 
-docker build -t nginx-image .\infrastructure\docker\nginx\ && docker run --name nginx --network parking-net -p:80:80 -d nginx-image
+docker build -t nginx-image ./infrastructure/docker/nginx/ && docker run --name nginx --network parking-net -p:80:80 -d nginx-image
 ```
 
 ***Without docker*:**
@@ -26,13 +30,9 @@ docker build -t nginx-image .\infrastructure\docker\nginx\ && docker run --name 
 Add your PostgreSQL connection settings in the .\infrastructure\resources\application.yml file
 
 Build and generate the artifact file with the maven command `mvn clean package` and then run the maven spring boot plugin     
-`mvn spring-boot:run` (or the java command ` java -jar .\infrastructure\target\infrastructure-0.0.1-SNAPSHOT.jar`).
+`mvn spring-boot:run` (or the java command ` java -jar ./infrastructure/target/infrastructure-0.0.1-SNAPSHOT.jar`).
 
 The API documentation will be accessible at [http://localhost:8080/swagger-ui/index.html](http:localhost:8080)
-
-***Heroku*:**
-
-https://cloud-parking-br.herokuapp.com/swagger-ui/index.html#
 
 ## How to authenticate
 
