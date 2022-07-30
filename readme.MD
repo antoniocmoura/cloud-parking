@@ -2,10 +2,11 @@
 
 - Performing Cloud Deployment of a set of APIs developed in Spring Boot using clean architecture and the main current best practices in the market.
 
-## How to build and run
-***Heroku*:**
+## Heroku Application
 
 https://cloud-parking-br.herokuapp.com/swagger-ui/index.html#
+
+## How to build and run
 
 ***With docker-compose*:**
 
