@@ -1,0 +1,1 @@
+web: java -jar ./infrastructure/target/infrastructure-0.0.1-SNAPSHOT.jar
