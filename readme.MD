@@ -2,6 +2,8 @@
 
 Performing Cloud Deployment of a set of APIs developed in Spring Boot using clean architecture and the main current market best practices.
 
+![image-20220718151350584](https://github.com/antoniocmoura/pix-bank/blob/main/pixbank.png)
+
 ## Authentication
 
 Login with user *admin* and password *admin* on the authentication endpoint and send the received JWT token in the request header.
